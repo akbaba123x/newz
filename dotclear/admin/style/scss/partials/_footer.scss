@@ -1,0 +1,41 @@
+span.tooltip {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+#footer {
+  p {
+    margin: 0;
+    padding: 0 1em;
+    font-size: 1em;
+  }
+
+  a img:not(.outgoing-js) {
+    height: 2em;
+    width: auto;
+  }
+
+  a:hover span.tooltip {
+    padding: 1em;
+    color: var(--tooltip-color);
+    height: auto;
+    width: auto;
+    left: 0.5em;
+    bottom: 0.5em;
+    background: var(--tooltip-background);
+    z-index: 99;
+    font-family: monospace;
+    text-align: left;
+    border: 2px solid var(--tooltip-color);
+    border-radius: 1em;
+  }
+}
+
+span.credit {
+  font-size: 1em;
+  font-weight: normal;
+}
