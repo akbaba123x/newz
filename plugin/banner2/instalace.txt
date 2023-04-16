@@ -1,0 +1,11 @@
+Plug-in Banner - 2. pozice
+==========================
+verze: 1.0.2
+
+
+Určeno pro phpRS verze 2.6.5 a výšší.
+
+Tento plug-in čerpá veškeré potřebné informace ze standardních součástí phpRS systému.
+
+Výsledkem přidání tohoto plug-inu do phpRS systému je nový systémový blok "Banner - 2. pozice", který umožňuje
+na své pozici zobrazit "spodní" reklamní kód respektive reklamní kód, jenž je uložen v definici "Dolní pozice".

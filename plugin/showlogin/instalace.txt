@@ -1,0 +1,14 @@
+Plug-in ShowLogin
+=================
+verze: 1.0.4
+
+
+Určeno pro phpRS verze 2.8.0 a výšší.
+
+Tento plug-in čerpá veškeré potřebné informace ze standardních součástí phpRS systému (především se jedná o informace
+získané ze třídy "CMyReader()", která ověřuje platnost přihlášení čtenářů k phpRS systému).
+
+Výstupem tohoto plag-inu je systémový blok "Zobrazit čtenáře", který zobrazuje informaci o tom, zda je konkrétní
+čtenář přihlášen jako registrovaný čtenář příslušného informačního webu. Součástí tohoto plug-inu je také odhlašovací
+link. V případě, že má přihlašení čtenář aktivovanou službu "zobrazit mé menu", tak se mu v tomto bloku zobrazí obsah
+jeho soukromého menu.

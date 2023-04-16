@@ -1,0 +1,675 @@
+body {
+	font-family: Verdana, "Geneva CE", lucida, sans-serif;
+	font-size: 12px;
+	color: #2b3953;
+	margin:0;
+	padding:0;
+	background:#fff;
+	/*	nestandardne vlastnosti - mozete ich odkomentovat CSS bude funkcne ale nebude validne	*/
+/*
+	scrollbar-face-color: #768db9;
+*/
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/*	zakladna tabulka layoutu	*/
+#layout {
+	display:table;
+	width:100%;
+	height:100%;
+}
+/*	lavy okraj layoutu	*/
+#lm {
+	display:table-cell;
+	width: 8%;
+	height:100%;
+	background:#9eaecd url('layLm.png') top right repeat-y;
+}
+/*	pravy okraj layoutu	*/
+#rm {
+	display:table-cell;
+	height:100%;
+	width: 8%;
+	background:#9eaecd url('layRm.png') top left repeat-y;
+}
+#central_block {
+	display:table-cell;
+	height:100%;
+	width: 84%;
+	vertical-align:top;
+}
+#c_tab {
+	display:table;
+	width:100%;
+	height:100%;
+	padding:0;
+	margin:0;
+}
+#tab_zahl {
+	display:table-row;
+}
+#tab_zahl_in {
+	display:table-cell;
+	width:100%;
+	height:178px;
+	padding:10px 10px 0 10px;
+}
+#tab_stred {
+	display:table-row;
+	width:100%;
+	vertical-align:top;
+}
+#tab_stred_obs {
+	display:table-cell;
+	vertical-align:top;
+	width:100%;
+	padding:0;
+	margin:0;
+}
+#tab_stred_obs_vn {
+	display:table;
+	width:100%;
+}
+#sl_1 {
+	display:table-cell;
+	vertical-align:top;
+	width:20%;
+}
+#sl_2 {
+	display:table-cell;
+	vertical-align:top;
+	width:60%;
+}
+#sl_3 {
+	display:table-cell;
+	vertical-align:top;
+	width:20%;
+}
+#tab_ft {
+	display:table-row;
+	width:100%;
+	vertical-align:bottom;
+}
+#tab_ft_in {
+	display:table-cell;
+	vertical-align:bottom;
+}
+/*	zahlavie	*/
+#zahlavi1 {
+	position: relative;
+	margin:0;
+	padding:0;
+	height:100px;
+	background:#9eaecd;
+}
+/*	napis - graficky prvok vlavo v zahlavi	*/
+#zahlavi-gr1 {
+	position:absolute;
+	bottom:-22px;
+	left:10px;
+	width:342px;
+	height:68px;
+	background:url("header-gr1.gif");
+	cursor: hand;
+}
+/*	graficky prvok napravo v zahlavi 	*/
+#zahlavi-gr2 {
+	position:absolute;
+	top:-15px;
+	right:-16px;
+	width:272px;
+	height:209px;
+	background:url("header-gr2.gif");
+}
+/*	ciarkovana spodna cast zahlavia 	*/
+#zahlavi2 {
+	margin:5px 0 0 0;
+	padding:0;
+	height:73px;
+	background:#768db9 url("header-bck.png") top right repeat-y;
+}
+/*	srafovane zapatie stranky	*/
+#zapati	{
+	padding:0.2em;
+	margin:0px 10px 12px 10px;
+ 	background:#768db9 url("header-bck.png") top right repeat-y;
+}
+
+/*	trieda pre vnutorne odsadenie - padding - stlpcov	*/
+.col {
+	padding:10px 10px 0 10px;
+}
+
+/*	odsadenie hlavného stlpca v sablone base	*/
+.hlav {
+	padding:10px 0 0 0;
+}
+
+/*	odsadenie z prava v sablone download	*/
+.hlav2 {
+	padding:10px 10px 0 0;
+}
+
+.zap-txt {
+	text-align: center;
+	color: #fff;
+	font-size: 9px;
+	margin:0.5em;
+}
+
+/*      definicia blokov typu 1 az 5 - spolocne vlastnosti	*/
+.blok1, .blok2, .blok2, .blok3, .blok4, .blok5	{
+	margin:0 0 9px 0;
+	padding:9px;
+	color:white;
+	font-weight: bold;
+	font-size:13px;
+}
+
+/*      definicia blokov typu 1 az 5 - rozdielne vlastnosti	*/
+.blok1	{
+	background:#768db9;
+}
+.blok2	{
+	background:#768db9;
+}
+
+.blok3	{
+	background:#768db9;
+}
+
+.blok4	{
+	background:#4f689a;
+}
+
+.blok5	{
+	background:#4f689a;
+}
+
+/*	definicia obsahu blokov 1-5 - spolocne vlastnosti	*/
+.blok1obs, .blok2obs, .blok3obs, .blok4obs, .blok5obs  {
+	padding:0;
+	margin:0 0 18px 0;
+	font-size:13px;
+}
+
+/*	definicia obsahu blokov 1-5 - rozdielne vlastnosti	*/
+.blok1obs {
+}
+
+.blok2obs {
+}
+
+.blok3obs {
+}
+
+.blok4obs {
+}
+
+.blok5obs {
+	padding:0 2px; background:#f0f6ff;
+}
+
+
+/* hyperlinky */
+
+A {
+	font-size: 100%;
+	font-style: normal;
+	font-variant: normal;
+}
+A:link {
+	color:#4f689a;
+}
+A:visited {
+	color:#4f689a;
+}
+A:hover {
+	color:#2b3953;
+}
+A:active {
+	color:#4f689a;
+}
+A.clanek:link {
+	color:#fff;
+	text-decoration: none;
+}
+A.clanek:visited {
+	color:#fff;
+	text-decoration: none;
+}
+A.clanek:hover {
+	color:#fff;
+	text-decoration: underline;
+}
+A.menu:link, A.menu:visited {
+	display:block;
+	font-weight: bolder;
+	color:#fff;
+	background:#9eaecd;
+	text-decoration: none;
+	padding:4px;
+	margin: 2px 0;
+	border:none;
+	font-size: 11px;
+}
+A.menu:hover {
+	display:block;
+	color:#fff;
+	background:#4f689a;
+	text-decoration: none;
+	padding:4px;
+	margin: 2px 0;
+}
+
+/* zakladni styly */
+
+.z {
+	color:#4f689a;
+	font-size: 13px;
+	font-weight: normal;
+}
+.nadpis {
+	text-align: center;
+	padding: 0.2em 0 0.2em 10px;
+	color:white;
+	background:#4f689a;
+	font-weight: bold;
+	font-size: 16px;
+}
+.podnadpis {
+	color:#4f689a;
+	text-align: center;
+	font-size: 14px;
+}
+.bledy {
+	color:#f0f6ff;
+}
+
+/* komentare */
+
+.kom-z {
+	color:#4f689a;
+	font-size: 11px;
+	font-weight: normal;
+}
+.kom-link {
+	color:#4f689a;
+	font-size: 13px;
+	font-weight: normal;
+}
+.kom-hlavicka {
+	color:#4f689a;
+	padding: 4px;
+	font-size: 11px;
+	font-weight: normal;
+}
+.kom-text {
+	color:#4f689a;
+	padding: 3px;
+	background: #fff;
+	border: 1px solid #4f689a;
+	font-size: 11px;
+	font-weight: normal;
+}
+.kom-cely-ram {
+	background:#e0e6f0;
+	padding:4px;
+	border: 1px solid #4f689a;
+	padding-bottom:4px;
+}
+
+/* ankety */
+.anketa-std-otazka,
+.anketa-cla-otazka,
+.anketa-blok-z,
+.anketasysz {
+	color:#4f689a;
+	font-size: 13px;
+	font-weight: normal;
+	margin:0;
+	padding:0.3em 0;
+	border-bottom: 1px solid #9eaecd;
+}
+.anketasysodp,
+.anketa-std-odpovedi,
+.anketa-cla-odpovedi,
+.anketa-blok-odpovedi {
+	color:#4f689a;
+	font-size: 12px;
+	font-weight: normal;
+	line-height:1.2em;
+	margin:0.2em 0;
+}
+.anketa-cla-celkovy-ram {
+	font-size: 13px;
+	text-align: left;
+	margin: 6px 0 12px 0;
+}
+.anketa-cla-ram {
+}
+.anketa-blok-odp-cara {
+	width:140px;
+	font-size:85%;
+	line-height:1em;
+	height:1em;
+	margin:2px 0;
+	padding:0;
+}
+.anketa-blok-odp-cara-hlasy {
+	height:1em;
+	background:#2b3953 url('gr-inq.png') 100% 0 repeat-y;
+}
+
+.anketa-std-ram {
+	text-align: left;
+}
+
+/* syst. blok - novinky */
+
+.nov-datum {
+	color:#4f689a;
+	font-size: 13px;
+	font-weight: bold;
+}
+.nov-titulek {
+	color:#4f689a;
+	font-size: 13px;
+	font-weight: bold;
+}
+.nov-titulek-duraz {
+	color:#2b3953;
+	font-size: 13px;
+	font-weight: bold;
+}
+.nov-text {
+	color:#4f689a;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+/* clanky */
+
+	/*	pozadie clanku ako modry vruh nalavo	*/
+.cla-cely {
+	margin:0;
+	background: url('cla-poz.png') top left repeat-y;
+}
+	/*	vnutovne odsadenie clanku zlava a zdola 	*/
+.cla-obsah {
+	padding: 0 0 10px 90px;
+}
+	/*	nadpis clanku	*/
+.cla-nadpis {
+	position: relative;
+	top: 7px;
+	padding: 0.2em 0 0.2em 10px;
+	color:white;
+	background:#4f689a;
+	font-weight: bold;
+	font-size: 13px;
+	margin: 0 0 3px 80px;
+}
+	/*	text clanku	*/
+.cla-text {
+	padding: 10px 0 0 0;
+	color:#4f689a;
+	font-weight: normal;
+	font-size: 13px;
+	text-align: justify;
+}
+	/*	styl pre informacie za clankom - autor, pocet precitani atd...	*/
+.cla-informace {
+	color:#4f689a;
+	font-size: 11px;
+	font-weight: normal;
+}
+	/*	odsadenie od krajov pri tlacovej sablone	*/
+.tisk {
+	padding:1em;
+}
+	/*		*/
+.cla-informace-tisk {
+	color:#000000;
+	font-size: 11px;
+	font-weight: normal;
+	font-style: italic;
+}
+	/*	odsadenie ikony temy	*/
+.obrtema {
+     margin-left: 5px;
+     position: absolute;
+}
+
+
+/* hodnoceni clanku */
+
+.hodnoceni-celkovy-ram {
+	background: #fff url("modra-prechod.png") top left repeat-x;
+	margin: 6px 0;
+	padding: 6px;
+	color:#4f689a;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+/* souvisejici clanky */
+
+.souvis-cla-celkovy-ram {
+	font-size: 13px;
+	text-align: left;
+	margin: 6px 0 12px 0;
+}
+
+/* download sekce */
+
+.download-z {
+	font-size: 13px;
+}
+.download-sekce {
+	font-size: 13px;
+	text-align: center;
+	padding: 6px;
+}
+.download-sekce-akt {
+	font-weight: bold;
+}
+
+/* weblinks sekce */
+
+.weblinks-z {
+	font-size: 13px;
+}
+.weblinks-sekce {
+	font-size: 13px;
+	text-align: center;
+	padding: 6px;
+}
+.weblinks-sekce-akt {
+	font-weight: bold;
+}
+
+/* std. navigacni lista */
+
+.std-navig {
+	font-size: 80%;
+	background:#f8faff;
+	margin:1em 0;
+	text-align: center;
+}
+
+.std-navig-akt-str {
+	color:#4f689a;
+} 
+
+/* dalsi pomocne styly*/
+
+.hodnoceni {
+
+}
+.banner1 {
+	background:#9eaecd;
+	color: #fff;
+	margin:0;
+	position:relative;
+	top:9px;
+}
+.banner1d {
+	background:#9eaecd;
+	color: #fff;
+	margin:0;
+	position:relative;
+	top:9px;
+	margin:0 10px 0 0;
+}
+
+/*
+nastavenie spodneho okraju pomocou border-bottom zabranuje nespravnemu
+zobrazeniu hodnoty margin v MSIE. Ak nie je nastaneny border, bloky
+banner a zapatie sa dotykaju - nezobrazi sa oddelovacia medzera
+*/
+
+.banner2 {
+	background:#9eaecd;
+	color: #fff;
+	margin: 5px 10px;
+	border-bottom:1px solid #fff;
+}
+
+.bannerpod {
+	color:#4f689a;
+	font-size: 9px;
+	font-weight: normal;
+	display:block;
+	padding: 4px 0;
+	margin:0 0 10px 0;
+}
+
+.banner-text {
+	color:#4f689a;
+	font-size: 9px;
+	font-weight: normal;
+	display:block;
+	padding: 4px 0;
+	margin:0 0 10px 0;
+}
+.banner-img {
+	color:#4f689a;
+	font-size: 9px;
+	font-weight: normal;
+	padding: 4px 0;
+	margin:0 0 10px 0;
+}
+
+.strankovani {
+	color:#4f689a;
+	font-size: 10px;
+	font-weight: bold;
+}
+.biltucne {
+	color:#fff;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.chybastredni {
+	color:#f00;
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+/* rozsirujici styly pro plug-iny */
+
+.kal-text {
+	color:#4f689a;
+	font-size: 12px;
+	font-weight: normal;
+}
+.kal-clanek {
+	background-color: #f0e0e6;
+}
+.kal-dnesni {
+	background-color: #e0e6f0;
+}
+.planakci {
+	font-size: 10px;
+}
+.informace {
+	color: #000;
+	font-size: 9px;
+	font-weight: normal;
+	width: 100%;
+}
+
+/*
+.mezera {
+	width: 5px;
+}
+.ohr {
+	width: auto;
+}
+*/
+.ram {
+	margin-bottom: 8px;
+}
+.preram {
+	border-bottom: 2px dotted #4f689a;
+	padding-bottom: 8px;
+	margin-bottom: 8px;
+}
+/*
+.horni-navig-lista {
+	border-top-width: 2px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 2px;
+	border-style: solid;
+	border-color: #003098;
+	padding: 2px;
+}
+*/
+
+/* textova pole, tlacitka */
+
+.textbox {
+	background-color: white;
+	color: #000000;
+	font-family: Verdana, "Geneva CE", lucida, sans-serif;
+	font-size: 12px;
+	text-align: left;
+	margin:2px 0;
+	padding:2px;
+	/*	nestandardne vlastnosti - mozete ich odkomentovat CSS bude funkcne ale nebude validne	*/
+/*
+	scrollbar-face-color: #768db9;
+*/
+}
+.textpole {
+	color: #000;
+	font-family: Verdana, "Geneva CE", lucida, sans-serif;
+	font-size: 11px;
+	margin:2px 0;
+	padding:2px;
+}
+
+.tl {
+	background-color: #768db9;
+	color: #f8faff;
+	font-family: Verdana, "Geneva CE", lucida, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+}
+
+form {
+	padding: 4px 0;
+	background: #fff url("modra-prechod.png") top left repeat-x;
+}
+
+a img {
+	border:none;
+}

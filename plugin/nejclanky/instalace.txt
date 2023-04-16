@@ -1,0 +1,11 @@
+Plug-in Nejčtenější články
+==========================
+verze: 1.2.0
+
+
+Určeno pro phpRS verze 2.8.0 a výšší.
+
+Tento plug-in čerpá veškeré potřebné informace ze standardních součástí phpRS systému.
+
+Prostřednictvím proměnné "$pocetmesicu" v souboru "nej_clanky.php" můžete nastavit v měsících maximální stáří článků,
+ve kterých se budou vyhledávat nejčtenější články. Proměnná "$mnozstviclanku" určuje počet zobrazených položek.
