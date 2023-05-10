@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress XmlDefaultAttributeValue -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:c="http://www.springframework.org/schema/c"
+        xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <tx:advice id="clientRPCHandlerTx" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- For methods that are used in "long-polling" or explicitly don't require a database connection,
+            we should add them to the "PROPAGATION_SUPPORTS" list below.  This ensures that these methods
+            don't unnecessarily hold a DB connection which severely limits our scalability.
+            Methods that don't require a DB connection should be added here.
+            NOTE
+            When External Account support is enabled, the DB is hit more often and differently, so take care.
+            In particular, getting a balance can cause it to be updated (so the transaction needs to be
+            writable), and entering an account with pin can cause a new account to be created. -->
+            <tx:method name="getPendingActions" propagation="SUPPORTS"/>
+            <tx:method name="getPendingPrintJob*" propagation="SUPPORTS"/>
+            <tx:method name="getPrintJobInfo" propagation="SUPPORTS"/>
+            <tx:method name="getUserMessages" propagation="SUPPORTS"/>
+            <tx:method name="clearAuthentication" propagation="SUPPORTS"/>
+            <tx:method name="ping" propagation="SUPPORTS"/>
+            <!-- If a method requires multiple DB hits, or manipulates objects across multiple service methods
+            we need to enable database access for them.  We default to creating a writable transaction.
+            IMPORTANT
+            It's important that APIs called very often (or the long polling) APIs do not
+            hold a DB connection.  That severely limits scalability!!-->
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <tx:advice id="providerRPCHandlerTx" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- processPrintJob and cancelPrintJob should not start their own transaction they will be created as
+             required later to have finer grained control of transactions, locking, etc. -->
+            <tx:method name="processPrintJob*" propagation="SUPPORTS"/>
+            <tx:method name="processPastPrintJob" propagation="SUPPORTS"/>
+            <tx:method name="cancelPrintJob" propagation="SUPPORTS"/>
+            <!-- To optimise the use of DB connections, only grab the connection when we need it. -->
+            <tx:method name="getConfigLastUpdatedTime" propagation="SUPPORTS"/>
+            <tx:method name="getConfig" propagation="SUPPORTS"/>
+            <tx:method name="getPrinterConfig" propagation="SUPPORTS"/>
+            <tx:method name="registerPrinter*" propagation="SUPPORTS"/>
+            <tx:method name="drainEvents" propagation="SUPPORTS"/>
+            <tx:method name="getPendingSpooledPrintJobs" propagation="SUPPORTS"/>
+            <tx:method name="reportPrinterStatus" propagation="SUPPORTS"/>
+            <tx:method name="updateSpooledJobStatus" propagation="SUPPORTS"/>
+            <tx:method name="validateAndRegisterRedirectedJob" propagation="SUPPORTS"/>
+            <!-- Standard patterns. -->
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+    <bean id="providerRPCHandler" class="biz.papercut.pcng.webservices.xmlrpc.ProviderRPCHandler"/>
+
+    <!-- Don't need transactions because there are handled by the app log manager. -->
+    <bean id="loggingRPCHandler" class="biz.papercut.pcng.webservices.xmlrpc.RemoteLogging"
+            p:applicationLogManager-ref="applicationLogManager"/>
+
+    <bean id="releaseStationRPCHandler" class="biz.papercut.pcng.webservices.xmlrpc.ReleaseStationRPCHandler"
+          p:applicationLogManager-ref="applicationLogManager"
+          p:configManager-ref="configManager"
+          p:releaseStationManager-ref="releaseStationManager"
+          p:userManager-ref="userManager"
+          p:creditSourceManager-ref="creditSourceManager"
+          p:authenticationManager-ref="authenticationManager"
+          p:printerManager-ref="printerManager"
+          p:creditUtilities-ref="creditUtilities"
+          p:internalUserManager-ref="internalUserManager"
+          p:userCoordinator-ref="userCoordinator"
+          p:releaseStationStatsCollector-ref="releaseStationStatsCollector"/>
+
+    <tx:advice id="apiRPCHandlerTx" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- processJob does not start a transaction, we create finer grained transactions to give us more control
+             over locking, etc. -->
+            <tx:method name="processJob" propagation="NEVER"/>
+            <!-- Standard patterns. -->
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+    <bean id="apiRPCHandler" class="biz.papercut.pcng.webservices.xmlrpc.ApiRPCHandler"
+            c:serverConfig-ref="bootstrapConfig"
+            c:accountManager-ref="accountManager"
+            c:accountSyncOperations-ref="accountSyncOperations"
+            c:applicationLogManager-ref="applicationLogManager"
+            c:backgroundTaskManager-ref="backgroundTaskManager"
+            c:configManager-ref="configManager"
+            c:creditSourceManager-ref="creditSourceManager"
+            c:groupMemberFunctions-ref="groupMemberFunctions"
+            c:groupManager-ref="groupManager"
+            c:printEventManager-ref="printEventManager"
+            c:printerManager-ref="printerManager"
+            c:synchronisationManager-ref="synchronisationManager"
+            c:systemManager-ref="systemManager"
+            c:topUpCardManager-ref="topUpCardManager"
+            c:userManager-ref="userManager"
+            c:authenticationManager-ref="authenticationManager"
+            c:userCoordinator-ref="userCoordinator"
+            c:creditUtilities-ref="creditUtilities"
+            c:passwordEncoder-ref="passwordEncoder"
+            c:userDataHistory-ref="userDataHistory"
+            c:javaDiagnostics-ref="javaDiagnostics"/>
+
+    <bean id="accountApiRPCHandler" class="biz.papercut.pcng.webservices.xmlrpc.AccountApiRPCHandler"
+            p:userManager-ref="userManager"
+            p:accountManager-ref="accountManager"
+            p:creditSourceManager-ref="creditSourceManager"
+            p:applicationLogManager-ref="applicationLogManager"
+            p:extDeviceIntegrationAPI-ref="extDeviceIntegrationAPI"/>
+
+    <bean id="apiJSONHandler" class="biz.papercut.pcng.webservices.json.ApiJSONHandler"
+            p:userManager-ref="userManager"
+            p:accountManager-ref="accountManager"
+            p:configManager-ref="configManager"
+            p:creditUtilities-ref="creditUtilities"
+            p:licenseManager-ref="licenseManager"/>
+
+</beans>
